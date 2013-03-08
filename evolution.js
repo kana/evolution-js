@@ -5,6 +5,7 @@
   var REPRODUCTION_ENERGY = 200;
 
   var plants = {};  // (x, y) -> t
+  var isDebugging = false;
 
   function random(n) {
     return Math.floor(Math.random() * n);
@@ -115,10 +116,29 @@
     $('#game_board').text(cs.join(''));
   }
 
+  function updateDebugInformation() {
+    $('#debug_animals').text(
+      animals.map(function (a) {
+        return 'x: ' + a.x + ', ' +
+               'y: ' + a.y + ', ' +
+               'energy: ' + a.energy + ', ' +
+               'dir: ' + a.dir + ', ' +
+               'genes: ' + a.genes.toString() + '\n';
+      }).join('')
+    );
+    $('#debug_plants').text(
+      $.map(plants, function (t, position) {
+        return position + '\n';
+      }).join('')
+    );
+  }
+
   function skipDays(n) {
     for (var i = 0; i < n; i++)
       updateWorld();
     drawWorld();
+    if (isDebugging)
+      updateDebugInformation();
   }
 
   $('#skip').click(function () {
@@ -130,8 +150,16 @@
     skipDays(n);
   });
 
+  $('#toggle_debug_information').click(function () {
+    isDebugging = !isDebugging;
+    $('#debug').toggle(isDebugging);
+    if (isDebugging)
+      updateDebugInformation();
+  });
+
   $(document).ready(function () {
     drawWorld();
+    $('#debug').toggle(isDebugging);
   });
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

@@ -5,3 +5,7 @@
   text-align: center;
   white-space: pre;
 }
+
+#debug_animals, #debug_plants {
+  white-space: pre;
+}

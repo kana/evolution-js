@@ -13,5 +13,9 @@
     var position = [left + random(width), top + random(height)];
     plants[position] = true;
   }
+  function add_plants() {
+    random_plant(JUNGLE.x, JUNGLE.y, JUNGLE.width, JUNGLE.height);
+    random_plant(MAP.x, MAP.y, MAP.width, MAP.height);
+  }
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

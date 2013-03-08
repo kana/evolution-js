@@ -8,5 +8,10 @@
   function random(n) {
     return Math.floor(Math.random() * n);
   }
+
+  function random_plant(left, top, width, height) {
+    var position = [left + random(width), top + random(height)];
+    plants[position] = true;
+  }
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

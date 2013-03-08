@@ -65,5 +65,13 @@
     }
     animal.dir = (animal.dir + ddir) % 8;
   }
+
+  function eat(animal) {
+    var position = [animal.x, animal.y];
+    if (plants[position]) {
+      animal.energy += PLANET_ENERGY;
+      delete plants[position];
+    }
+  }
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

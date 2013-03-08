@@ -129,5 +129,9 @@
     }
     skipDays(n);
   });
+
+  $(document).ready(function () {
+    drawWorld();
+  });
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

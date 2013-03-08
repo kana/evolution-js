@@ -104,17 +104,25 @@
   }
 
   function drawWorld() {
+    var atable = {};
+    animals.forEach(function (a) {
+      atable[[a.x, a.y]] = a;
+    });
+
     var cs = [];
     for (var y = MAP.y; y < MAP.height; y++) {
       for (var x = MAP.x; x < MAP.width; x++) {
+        var a = atable[[x, y]];
+        var p = plants[[x, y]];
         cs.push(
-          animals.some(function (a) {return a.x == x && a.y == y;}) ? 'M' : 
-          plants[[x, y]] ? '*' :
+          a ? 'M' :
+          p ? '*' :
           ' '
         );
       }
       cs.push('\n');
     }
+
     $('#game_board').text(cs.join(''));
   }
 

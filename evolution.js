@@ -99,5 +99,20 @@
     });
     add_plants();
   }
+
+  function drawWorld() {
+    var cs = [];
+    for (var y = MAP.y; y < MAP.height; y++) {
+      for (var x = MAP.x; x < MAP.width; x++) {
+        cs.push(
+          animals.some(function (a) {return a.x == x && a.y == y;}) ? 'M' : 
+          plants[[x, y]] ? '*' :
+          ' '
+        );
+      }
+      cs.push('\n');
+    }
+    $('#game_board').text(cs.join(''));
+  }
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

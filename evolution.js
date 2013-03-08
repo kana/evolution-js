@@ -114,5 +114,11 @@
     }
     $('#game_board').text(cs.join(''));
   }
+
+  function skipDays(n) {
+    for (var i = 0; i < n; i++)
+      updateWorld();
+    drawWorld();
+  }
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

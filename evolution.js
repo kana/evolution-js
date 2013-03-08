@@ -17,5 +17,15 @@
     random_plant(JUNGLE.x, JUNGLE.y, JUNGLE.width, JUNGLE.height);
     random_plant(MAP.x, MAP.y, MAP.width, MAP.height);
   }
+
+  var animals = [
+    {
+      x: MAP.width >> 1,
+      y: MAP.height >> 1,
+      energy: 1000,
+      dir: 0,
+      genes: $.map(new Array(8), function () {return random(10) + 1;})
+    }
+  ];
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

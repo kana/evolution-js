@@ -103,8 +103,31 @@
     add_plants();
   }
 
+  var ANIMAL_COLORS = [
+    [255,   0,   0],
+    [255, 191,   0],
+    [128, 255,   0],
+    [  0, 255,  64],
+    [  0, 255, 255],
+    [  0,  64, 255],
+    [128,   0, 255],
+    [255,   0, 191]
+  ];
   function colorAnimal(a) {
-    return 'rgb(255,0,0)';
+    var factor = 1 / a.genes.reduce(function (acc, g) {return acc + g;});
+    function pick(ci) {
+      return Math.round(
+        Math.min(
+          255,
+          a.genes.map(function (g, i) {
+            return g * ANIMAL_COLORS[i][ci] * factor;
+          }).reduce(function (r, c) {
+            return r + c;
+          })
+        )
+      );
+    }
+    return 'rgb(' + pick(0) + ',' + pick(1) + ',' + pick(2) + ')';
   }
 
   function colorPlant(p) {

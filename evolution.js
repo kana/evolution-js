@@ -120,5 +120,14 @@
       updateWorld();
     drawWorld();
   }
+
+  $('#skip').click(function () {
+    var n = parseInt($('#skip_day_count').val());
+    if (isNaN(n)) {
+      $('#skip_day_count').val('0');
+      return;
+    }
+    skipDays(n);
+  });
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

@@ -88,5 +88,16 @@
     child.genes = genes;
     animals.push(child);
   }
+
+  function updateWorld() {
+    animals = animals.filter(function (a) {return 0 < a.energy;});
+    animals.forEach(function (a) {
+      turn(a);
+      move(a);
+      eat(a);
+      reproduce(a);
+    });
+    add_plants();
+  }
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

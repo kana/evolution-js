@@ -27,5 +27,31 @@
       genes: $.map(new Array(8), function () {return random(10) + 1;})
     }
   ];
+
+  var DX_FROM_DIR = {
+    0: -1,
+    1: 0,
+    2: 1,
+    3: 1,
+    4: 1,
+    5: 0,
+    6: -1,
+    7: -1,
+  };
+  var DY_FROM_DIR = {
+    0: -1,
+    1: -1,
+    2: -1,
+    3: 0,
+    4: 1,
+    5: 1,
+    6: 1,
+    7: 0,
+  };
+  function move(animal) {
+    animal.x = (animal.x + DX_FROM_DIR[animal.dir] + MAP.width) % MAP.width;
+    animal.y = (animal.y + DY_FROM_DIR[animal.dir] + MAP.height) % MAP.height;
+    animal.energy--;
+  }
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

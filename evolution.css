@@ -1,0 +1,7 @@
+#game_board {
+  background: #eee;
+  border: thin solid #999;
+  font-family: monospace;
+  text-align: center;
+  white-space: pre;
+}

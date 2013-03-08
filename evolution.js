@@ -4,5 +4,9 @@
   var PLANET_ENERGY = 80;
 
   var plants = {};  // (x, y) -> t
+
+  function random(n) {
+    return Math.floor(Math.random() * n);
+  }
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

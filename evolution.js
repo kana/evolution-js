@@ -168,7 +168,7 @@
           'transparent';
         cs.push(
           '<span style="color: ' + color + '">' + (
-            a ? symbolizeAnimalByAge(a, maxAge) :
+            a ? symbolizeAnimalByEnergy(a, maxAge) :
             p ? '*' :
             ' '
           ) + '</span>'

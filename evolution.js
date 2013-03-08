@@ -103,6 +103,13 @@
     add_plants();
   }
 
+  var ANIMAL_SYMBOLS = '.cohbHNM';
+  function symbolizeAnimalByEnergy(a) {
+    var step = REPRODUCTION_ENERGY / ANIMAL_SYMBOLS.length;
+    var si = Math.min(Math.round(a.energy / step), ANIMAL_SYMBOLS.length - 1);
+    return ANIMAL_SYMBOLS[si];
+  }
+
   var ANIMAL_COLORS = [
     [255,   0,   0],
     [255, 191,   0],
@@ -151,7 +158,7 @@
           'transparent';
         cs.push(
           '<span style="color: ' + color + '">' + (
-            a ? 'M' :
+            a ? symbolizeAnimalByEnergy(a) :
             p ? '*' :
             ' '
           ) + '</span>'

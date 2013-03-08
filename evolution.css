@@ -6,6 +6,11 @@
   white-space: pre;
 }
 
+#skip_day_count {
+  text-align: right;
+  width: 3em;
+}
+
 #debug_animals, #debug_plants {
   white-space: pre;
 }

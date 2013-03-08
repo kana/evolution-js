@@ -112,6 +112,11 @@
     var si = Math.min(Math.round(a.energy / step), ANIMAL_SYMBOLS.length - 1);
     return ANIMAL_SYMBOLS[si];
   }
+  function symbolizeAnimalByAge(a, maxAge) {
+    var step = maxAge / ANIMAL_SYMBOLS.length;
+    var si = Math.min(Math.round(a.age / step), ANIMAL_SYMBOLS.length - 1);
+    return ANIMAL_SYMBOLS[si];
+  }
 
   var ANIMAL_COLORS = [
     [255,   0,   0],
@@ -146,8 +151,10 @@
 
   function drawWorld() {
     var atable = {};
+    var maxAge = 0;
     animals.forEach(function (a) {
       atable[[a.x, a.y]] = a;
+      maxAge = Math.max(a.age, maxAge);
     });
 
     var cs = [];
@@ -161,7 +168,7 @@
           'transparent';
         cs.push(
           '<span style="color: ' + color + '">' + (
-            a ? symbolizeAnimalByEnergy(a) :
+            a ? symbolizeAnimalByAge(a, maxAge) :
             p ? '*' :
             ' '
           ) + '</span>'

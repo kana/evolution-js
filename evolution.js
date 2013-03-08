@@ -103,6 +103,14 @@
     add_plants();
   }
 
+  function colorAnimal(a) {
+    return 'rgb(255,0,0)';
+  }
+
+  function colorPlant(p) {
+    return 'rgb(0,204,0)';
+  }
+
   function drawWorld() {
     var atable = {};
     animals.forEach(function (a) {
@@ -114,16 +122,22 @@
       for (var x = MAP.x; x < MAP.width; x++) {
         var a = atable[[x, y]];
         var p = plants[[x, y]];
+        var color =
+          a ? colorAnimal(a) :
+          p ? colorPlant(p) :
+          'transparent';
         cs.push(
-          a ? 'M' :
-          p ? '*' :
-          ' '
+          '<span style="color: ' + color + '">' + (
+            a ? 'M' :
+            p ? '*' :
+            ' '
+          ) + '</span>'
         );
       }
       cs.push('\n');
     }
 
-    $('#game_board').text(cs.join(''));
+    $('#game_board').html($(cs.join('')));
   }
 
   function updateDebugInformation() {

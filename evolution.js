@@ -53,5 +53,17 @@
     animal.y = (animal.y + DY_FROM_DIR[animal.dir] + MAP.height) % MAP.height;
     animal.energy--;
   }
+
+  function turn(animal) {
+    var n = random(animal.genes.reduce(function (acc, g) {return acc + g;}));
+    var ddir = 0;
+    for (var i = 0; i < animal.genes.length; i++) {
+      n -= animal.genes[i];
+      if (n < 0)
+        break;
+      ddir++;
+    }
+    animal.dir = (animal.dir + ddir) % 8;
+  }
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

@@ -74,5 +74,19 @@
       delete plants[position];
     }
   }
+
+  function reproduce(animal) {
+    var e = animal.energy;
+    if (e < REPRODUCTION_ENERGY)
+      return;
+
+    animal.energy = e >> 1;
+    var child = $.extend({}, animal);
+    var genes = $.extend([], animal.genes);
+    var mutation = random(8);
+    genes[mutation] = Math.max(1, genes[mutation] + random(3) - 1);
+    child.genes = genes;
+    animals.push(child);
+  }
 })();
 // vim: expandtab softtabstop=2 shiftwidth=2

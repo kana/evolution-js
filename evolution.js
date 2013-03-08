@@ -3,9 +3,11 @@
   var JUNGLE = {x: 45, y: 10, width: 10, height: 10};
   var PLANET_ENERGY = 80;
   var REPRODUCTION_ENERGY = 200;
+  var AUTOMATIC_SKIPPING_INTERVAL_MS = 1000;
 
   var plants = {};  // (x, y) -> t
   var isDebugging = false;
+  var automaticSkippingId = undefined;
 
   function random(n) {
     return Math.floor(Math.random() * n);
@@ -155,6 +157,21 @@
     $('#debug').toggle(isDebugging);
     if (isDebugging)
       updateDebugInformation();
+  });
+
+  $('#automatic_skip').change(function () {
+    var isEnabled = $(this).filter(':checked').length != 0;
+    if (isEnabled) {
+      automaticSkippingId = setInterval(
+        function () {
+          $('#skip').click();
+        },
+        AUTOMATIC_SKIPPING_INTERVAL_MS
+      );
+    } else {
+      if (automaticSkippingId !== undefined)
+        clearInterval(automaticSkippingId);
+    }
   });
 
   $(document).ready(function () {

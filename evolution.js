@@ -28,7 +28,8 @@
       y: MAP.height >> 1,
       energy: 1000,
       dir: 0,
-      genes: $.map(new Array(8), function () {return random(10) + 1;})
+      genes: $.map(new Array(8), function () {return random(10) + 1;}),
+      age: 0
     }
   ];
 
@@ -56,6 +57,7 @@
     animal.x = (animal.x + DX_FROM_DIR[animal.dir] + MAP.width) % MAP.width;
     animal.y = (animal.y + DY_FROM_DIR[animal.dir] + MAP.height) % MAP.height;
     animal.energy--;
+    animal.age++;
   }
 
   function turn(animal) {
@@ -89,6 +91,7 @@
     var mutation = random(8);
     genes[mutation] = Math.max(1, genes[mutation] + random(3) - 1);
     child.genes = genes;
+    child.age = 0;
     animals.push(child);
   }
 
@@ -177,7 +180,8 @@
                'y: ' + a.y + ', ' +
                'energy: ' + a.energy + ', ' +
                'dir: ' + a.dir + ', ' +
-               'genes: ' + a.genes.toString() + '\n';
+               'genes: ' + a.genes.toString() + ', ' +
+               'age: ' + a.age + '\n';
       }).join('')
     );
     $('#debug_plants').text(

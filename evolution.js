@@ -1,9 +1,17 @@
 (function () {
-  var MAP = {x: 0, y: 0, width: 100, height: 30};
-  var JUNGLE = {x: 45, y: 10, width: 10, height: 10};
-  var PLANT_ENERGY = 80;
-  var REPRODUCTION_ENERGY = 200;
-  var AUTOMATIC_SKIPPING_INTERVAL_MS = 1000;
+  var config = {
+    map_x: 0,
+    map_y: 0,
+    map_width: 100,
+    map_height: 30,
+    jungle_x: 45,
+    jungle_y: 10,
+    jungle_width: 10,
+    jungle_height: 10,
+    plant_energy: 80,
+    reproduction_energy: 200,
+    automatic_skipping_interval_ms: 1000,
+  };
 
   var plants;  // (x, y) -> t
   var isDebugging = false;
@@ -20,8 +28,10 @@
     plants[position] = true;
   }
   function add_plants() {
-    random_plant(JUNGLE.x, JUNGLE.y, JUNGLE.width, JUNGLE.height);
-    random_plant(MAP.x, MAP.y, MAP.width, MAP.height);
+    random_plant(config.jungle_x, config.jungle_y,
+                 config.jungle_width, config.jungle_height);
+    random_plant(config.map_x, config.map_y,
+                 config.map_width, config.map_height);
   }
 
   var DX_FROM_DIR = {
@@ -45,8 +55,10 @@
     7: 0,
   };
   function move(animal) {
-    animal.x = (animal.x + DX_FROM_DIR[animal.dir] + MAP.width) % MAP.width;
-    animal.y = (animal.y + DY_FROM_DIR[animal.dir] + MAP.height) % MAP.height;
+    animal.x = (animal.x + DX_FROM_DIR[animal.dir] + config.map_width)
+               % config.map_width;
+    animal.y = (animal.y + DY_FROM_DIR[animal.dir] + config.map_height)
+               % config.map_height;
     animal.energy--;
     animal.age++;
   }
@@ -66,14 +78,14 @@
   function eat(animal) {
     var position = [animal.x, animal.y];
     if (plants[position]) {
-      animal.energy += PLANT_ENERGY;
+      animal.energy += config.plant_energy;
       delete plants[position];
     }
   }
 
   function reproduce(animal) {
     var e = animal.energy;
-    if (e < REPRODUCTION_ENERGY)
+    if (e < config.reproduction_energy)
       return;
 
     animal.energy = e >> 1;
@@ -100,7 +112,7 @@
 
   var ANIMAL_SYMBOLS = '.cohbHNM';
   function symbolizeAnimalByEnergy(a) {
-    var step = REPRODUCTION_ENERGY / ANIMAL_SYMBOLS.length;
+    var step = config.reproduction_energy / ANIMAL_SYMBOLS.length;
     var si = Math.min(Math.round(a.energy / step), ANIMAL_SYMBOLS.length - 1);
     return ANIMAL_SYMBOLS[si];
   }
@@ -150,8 +162,8 @@
     });
 
     var cs = [];
-    for (var y = MAP.y; y < MAP.height; y++) {
-      for (var x = MAP.x; x < MAP.width; x++) {
+    for (var y = config.map_y; y < config.map_height; y++) {
+      for (var x = config.map_x; x < config.map_width; x++) {
         var a = atable[[x, y]];
         var p = plants[[x, y]];
         var color =
@@ -204,8 +216,8 @@
     currentDay = 0;
     animals = [
       {
-        x: MAP.width >> 1,
-        y: MAP.height >> 1,
+        x: config.map_width >> 1,
+        y: config.map_height >> 1,
         energy: 1000,
         dir: 0,
         genes: $.map(new Array(8), function () {return random(10) + 1;}),
@@ -239,7 +251,7 @@
         function () {
           $('#skip').click();
         },
-        AUTOMATIC_SKIPPING_INTERVAL_MS
+        config.automatic_skipping_interval_ms
       );
     } else {
       if (automaticSkippingId !== undefined)

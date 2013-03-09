@@ -217,6 +217,7 @@
 
   $('#toggle_debug_information').click(function () {
     isDebugging = !isDebugging;
+    $(this).text((isDebugging ? 'Hide' : 'Show') + ' debug information');
     $('#debug').toggle(isDebugging);
     if (isDebugging)
       updateDebugInformation();

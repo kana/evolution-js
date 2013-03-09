@@ -5,10 +5,11 @@
   var REPRODUCTION_ENERGY = 200;
   var AUTOMATIC_SKIPPING_INTERVAL_MS = 1000;
 
-  var plants = {};  // (x, y) -> t
+  var plants;  // (x, y) -> t
   var isDebugging = false;
   var automaticSkippingId = undefined;
-  var currentDay = 0;
+  var currentDay;  // Int
+  var animals;  // [Animal]
 
   function random(n) {
     return Math.floor(Math.random() * n);
@@ -22,17 +23,6 @@
     random_plant(JUNGLE.x, JUNGLE.y, JUNGLE.width, JUNGLE.height);
     random_plant(MAP.x, MAP.y, MAP.width, MAP.height);
   }
-
-  var animals = [
-    {
-      x: MAP.width >> 1,
-      y: MAP.height >> 1,
-      energy: 1000,
-      dir: 0,
-      genes: $.map(new Array(8), function () {return random(10) + 1;}),
-      age: 0
-    }
-  ];
 
   var DX_FROM_DIR = {
     0: -1,
@@ -209,6 +199,22 @@
       updateDebugInformation();
   }
 
+  function resetWorld() {
+    plants = {};
+    currentDay = 0;
+    animals = [
+      {
+        x: MAP.width >> 1,
+        y: MAP.height >> 1,
+        energy: 1000,
+        dir: 0,
+        genes: $.map(new Array(8), function () {return random(10) + 1;}),
+        age: 0
+      }
+    ];
+    drawWorld();
+  }
+
   $('#skip').click(function () {
     var n = parseInt($('#skip_day_count').val());
     if (isNaN(n)) {
@@ -242,7 +248,7 @@
   });
 
   $(document).ready(function () {
-    drawWorld();
+    resetWorld();
     $('#debug').toggle(isDebugging);
   });
 })();

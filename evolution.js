@@ -1,7 +1,7 @@
 (function () {
   var MAP = {x: 0, y: 0, width: 100, height: 30};
   var JUNGLE = {x: 45, y: 10, width: 10, height: 10};
-  var PLANET_ENERGY = 80;
+  var PLANT_ENERGY = 80;
   var REPRODUCTION_ENERGY = 200;
   var AUTOMATIC_SKIPPING_INTERVAL_MS = 1000;
 
@@ -66,7 +66,7 @@
   function eat(animal) {
     var position = [animal.x, animal.y];
     if (plants[position]) {
-      animal.energy += PLANET_ENERGY;
+      animal.energy += PLANT_ENERGY;
       delete plants[position];
     }
   }

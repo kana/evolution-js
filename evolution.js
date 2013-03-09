@@ -247,6 +247,10 @@
     }
   });
 
+  $('#reset_world').click(function () {
+    resetWorld();
+  });
+
   $(document).ready(function () {
     resetWorld();
     $('#debug').toggle(isDebugging);

@@ -8,6 +8,7 @@
   var plants = {};  // (x, y) -> t
   var isDebugging = false;
   var automaticSkippingId = undefined;
+  var currentDay = 0;
 
   function random(n) {
     return Math.floor(Math.random() * n);
@@ -104,6 +105,7 @@
       reproduce(a);
     });
     add_plants();
+    currentDay++;
   }
 
   var ANIMAL_SYMBOLS = '.cohbHNM';
@@ -178,6 +180,7 @@
     }
 
     $('#game_board').html($(cs.join('')));
+    $('#currentDay').text(currentDay);
   }
 
   function updateDebugInformation() {

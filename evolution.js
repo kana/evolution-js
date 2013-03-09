@@ -263,6 +263,20 @@
     resetWorld();
   });
 
+  function setUpConfigForm(key) {
+    $('#' + key).
+      val(config[key]).
+      change(function () {
+        var n = parseInt($(this).val());
+        if (isNaN(n)) {
+          $(this).val(config[key]);
+          return;
+        }
+        config[key] = n;
+      });
+  }
+  $.map(config, function (_, key) {setUpConfigForm(key);});
+
   $(document).ready(function () {
     resetWorld();
     $('#debug').toggle(isDebugging);

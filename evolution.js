@@ -100,13 +100,20 @@
 
   function updateWorld() {
     animals = animals.filter(function (a) {return 0 < a.energy;});
-    animals.forEach(function (a) {
+
+    // reproduce() may push new children to animals, and new children should
+    // not be processed in the current day.  So that animals should be
+    // traversed backward to avoid processing new children in the current day.
+    for (var i = animals.length - 1; 0 <= i; i--) {
+      var a = animals[i];
       turn(a);
       move(a);
       eat(a);
       reproduce(a);
-    });
+    }
+
     add_plants();
+
     currentDay++;
   }
 
